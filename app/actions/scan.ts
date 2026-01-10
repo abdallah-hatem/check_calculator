@@ -1,8 +1,9 @@
 "use server";
 
+import { API_KEY } from "@/utils/keys";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+const genAI = new GoogleGenerativeAI(API_KEY || "");
 const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
 
 export interface ScannedItem {
@@ -26,10 +27,9 @@ export async function scanReceipt(
 ): Promise<ScanResult | null> {
   console.log("--- Server Action: scanReceipt Started ---");
 
-  const apiKey = process.env.GEMINI_API_KEY;
-  console.log("API Key present:", !!apiKey, "Length:", apiKey?.length);
+  console.log("API Key present:", !!API_KEY, "Length:", API_KEY?.length);
 
-  if (!apiKey) {
+  if (!API_KEY) {
     console.error("Missing GEMINI_API_KEY environment variable");
     throw new Error("Server configuration error: Missing API Key");
   }

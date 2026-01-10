@@ -1,10 +1,11 @@
 import * as dotenv from "dotenv";
 
+import { API_KEY } from "../utils/keys";
 // Load env vars from .env.local
 dotenv.config({ path: ".env.local" });
 
 async function listModelsRaw() {
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = API_KEY;
   if (!apiKey) {
     console.error("No API key found in .env.local");
     return;
